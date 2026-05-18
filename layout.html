@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}{% endblock %} - Flask Menu</title>
+</head>
+<body>
+
+    <!-- Menu Lateral Otimizado -->
+    <header class="sidebar">
+        <div class="logo">
+            <span>Flask App</span>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('page1') }}">Sobre Python</a></li>
+                <li><a href="{{ url_for('page2') }}">Sobre o Flask</a></li>
+                <li><a href="{{ url_for('page3') }}">Sobre ser estudante de TI</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Área de Conteúdo Principal -->
+    <main class="conteudo">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
