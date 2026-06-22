@@ -1,0 +1,17 @@
+from . import db
+from .base import ModeloBase
+sessao = db.relationship("Sessao")
+
+
+class Ingresso(ModeloBase):
+    """Opcional — vale ponto extra se implementar compra de ingresso."""
+
+    __tablename__ = "ingressos"
+
+    sessao_id = db.Column(db.Integer, db.ForeignKey("sessoes.id"), nullable=False)
+    assento = db.Column(db.String(10), nullable=False)
+    nome_comprador = db.Column(db.String(120), nullable=False)
+    assento = db.Column(db.String(10), nullable=False)
+    nome_comprador = db.Column(db.String(120), nullable=False)
+
+    sessao = db.relationship("Sessao", backref="lista_ingressos")

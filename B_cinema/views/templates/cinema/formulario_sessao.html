@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 class="mb-4">Cadastrar Nova Sessão</h2>
+    
+    <form action="{{ url_for('cinema.cadastrar_sessao') }}" method="POST">
+        <div class="mb-3">
+            <label for="filme_id" class="form-label">Filme:</label>
+            <select name="filme_id" id="filme_id" class="form-select" required>
+                {% if filmes %}
+                    <option value="">Selecione um filme...</option>
+                    {% for filme in filmes %}
+                        <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">Nenhum filme cadastrado no banco</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="sala_id" class="form-label">Sala:</label>
+            <select name="sala_id" id="sala_id" class="form-select" required>
+                {% if salas %}
+                    <option value="">Selecione uma sala...</option>
+                    {% for sala in salas %}
+                        <option value="{{ sala.id }}">{{ sala.nome }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">Nenhuma sala cadastrada no banco</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="data_hora" class="form-label">Data e Hora:</label>
+            <input type="datetime-local" name="data_hora" id="data_hora" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="preco" class="form-label">Preço do Ingresso (R$):</label>
+            <input type="number" step="0.01" name="preco" id="preco" class="form-control" placeholder="0.00" required>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success" {% if not filmes or not salas %}disabled{% endif %}>Salvar Sessão</button>
+            <a href="{{ url_for('cinema.index') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

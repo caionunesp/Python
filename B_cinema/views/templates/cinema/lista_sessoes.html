@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Programação de Sessões</h2>
+        <a href="{{ url_for('cinema.cadastrar_sessao') }}" class="btn btn-primary">Cadastrar Nova Sessão</a>
+    </div>
+
+    {% if sessoes %}
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Filme</th>
+                    <th>Sala</th>
+                    <th>Data e Hora</th>
+                    <th>Preço do Ingresso</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sessao in sessoes %}
+                <tr>
+                    <td>{{ sessao.filme.titulo }}</td> 
+                    <td>{{ sessao.sala.nome }}</td>
+                    <td>{{ sessao.data_hora.strftime('%d/%m/%Y %H:%M') if sessao.data_hora else '' }}</td>
+                    <td>R$ {{ "%.2f"|format(sessao.preco) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info text-center p-5" role="alert">
+            <h4 class="alert-heading">Nenhuma sessão agendada!</h4>
+            <p>Atualmente não existem sessões de cinema registradas no sistema.</p>
+            <hr>
+            <p class="mb-0">Clique no botão no topo direito para adicionar a primeira sessão.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

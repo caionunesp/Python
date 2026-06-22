@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %} 
+
+<div class="container mt-4">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <h1 class="display-5 fw-bold">Painel do Cinema</h1>
+        <p class="fs-4">Sistema de gerenciamento de sessões.</p>
+    </div>
+
+    <!-- BOTÃO DE CADASTRO DIRETOR NO PAINEL -->
+    <div class="mb-4">
+        <a href="{{ url_for('cinema.cadastrar_sessao') }}" class="btn btn-primary btn-lg">Cadastrar Nova Sessão</a>
+        <a href="{{ url_for('cinema.index') }}" class="btn btn-secondary btn-lg">Ver Programação</a>
+    </div>
+
+    <div class="row text-center mt-4">
+        <div class="col-md-4"><div class="card p-3"><h5>Filmes</h5><h3>{{ total_filmes }}</h3></div></div>
+        <div class="col-md-4"><div class="card p-3"><h5>Salas</h5><h3>{{ total_salas }}</h3></div></div>
+        <div class="col-md-4"><div class="card p-3"><h5>Sessões</h5><h3>{{ total_sessoes }}</h3></div></div>
+    </div>
+</div>
+
+{% endblock %}
